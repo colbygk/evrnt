@@ -1,0 +1,23 @@
+version: '3.4'
+volumes:
+  golang_libs:
+  runtime_data:
+
+networks:
+  evrnt_network:
+
+services:
+  app:
+    container_name: evrnt-app
+    hostname: evrnt-app
+    build:  
+      context: ./
+      dockerfile: Dockerfile
+    image: evrnt-app:latest
+    volumes:
+      - type: bind
+        source: ./
+        target: /evrnt
+        volume:
+          nocopy: true
+      - runtime_data:/runtime
